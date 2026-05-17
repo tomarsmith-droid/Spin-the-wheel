@@ -72,6 +72,24 @@ export function ResultModal({
               style={{ background: option.color }}
             />
 
+            {/* Close X */}
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute right-3 top-4 z-10 w-8 h-8 rounded-full grid place-items-center bg-white/60 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 transition-colors"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="w-3.5 h-3.5 text-ink-500 dark:text-ink-200"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
+                <path d="M6 6l12 12M6 18L18 6" />
+              </svg>
+            </button>
+
             <div className="px-6 pt-7 pb-6 text-center">
               <motion.div
                 initial={{ scale: 0.4, opacity: 0 }}
@@ -128,12 +146,6 @@ export function ResultModal({
                 </button>
               </div>
 
-              <button
-                onClick={onClose}
-                className="mt-3 text-xs text-ink-400 dark:text-ink-300 hover:underline"
-              >
-                Close
-              </button>
             </div>
           </motion.div>
         </motion.div>

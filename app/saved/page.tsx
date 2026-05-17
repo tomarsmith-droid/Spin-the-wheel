@@ -136,7 +136,7 @@ function Inner() {
                 </div>
 
                 {/* Mini wheel preview */}
-                <Preview colors={w.options.map((o) => o.color)} />
+                <MiniWheel colors={w.options.map((o) => o.color)} />
 
                 <div className="flex flex-wrap gap-1">
                   {w.options.slice(0, 4).map((o) => (
@@ -187,20 +187,43 @@ function Inner() {
   );
 }
 
-function Preview({ colors }: { colors: string[] }) {
-  const segs = colors.slice(0, 12);
+function MiniWheel({ colors }: { colors: string[] }) {
+  const segs = colors.length === 0 ? ["#3a3f4d"] : colors;
+  const total = segs.length;
+  const seg = 360 / total;
+  const r = 44;
+  const toRad = (deg: number) => ((deg - 90) * Math.PI) / 180;
+  const arc = (start: number, end: number) => {
+    const x1 = 50 + r * Math.cos(toRad(start));
+    const y1 = 50 + r * Math.sin(toRad(start));
+    const x2 = 50 + r * Math.cos(toRad(end));
+    const y2 = 50 + r * Math.sin(toRad(end));
+    const large = end - start > 180 ? 1 : 0;
+    return `M50,50 L${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2} Z`;
+  };
   return (
-    <div className="relative w-full aspect-[16/5] rounded-xl overflow-hidden">
-      <div className="absolute inset-0 flex">
-        {segs.length === 0 ? (
-          <div className="flex-1 bg-ink-200 dark:bg-white/10" />
-        ) : (
-          segs.map((c, i) => (
-            <div key={i} className="flex-1" style={{ background: c }} />
-          ))
-        )}
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
+    <div className="relative w-full aspect-[16/6] rounded-xl overflow-hidden bg-gradient-to-br from-ink-100 to-ink-200 dark:from-ink-800 dark:to-ink-900 grid place-items-center">
+      <svg viewBox="0 0 100 100" className="h-full max-h-[110%]">
+        <circle cx="50" cy="50" r="46" fill="#FFD428" />
+        <circle cx="50" cy="50" r="44.5" fill="#05080F" />
+        {segs.map((c, i) => (
+          <path key={i} d={arc(i * seg, (i + 1) * seg)} fill={c} />
+        ))}
+        <circle cx="50" cy="50" r="6" fill="#0A0E1A" />
+        <circle cx="50" cy="50" r="3" fill="#FFD428" />
+      </svg>
+      {/* Mini pointer */}
+      <svg
+        viewBox="0 0 10 12"
+        className="absolute left-1/2 -translate-x-1/2 top-0.5 w-3 h-3.5"
+      >
+        <path
+          d="M5 11 L1 4 Q1 1 5 1 Q9 1 9 4 Z"
+          fill="#FFD428"
+          stroke="#0A0E1A"
+          strokeWidth="0.5"
+        />
+      </svg>
     </div>
   );
 }
