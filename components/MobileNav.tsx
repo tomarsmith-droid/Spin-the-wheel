@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 const items = [
   { href: "/", label: "Home", icon: HomeIcon },
+  { href: "/wizards", label: "Wizards", icon: WandIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/stats", label: "Stats", icon: ChartIcon },
   { href: "/settings", label: "Settings", icon: GearIcon },
@@ -64,6 +65,15 @@ function HomeIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" strokeWidth="2" stroke="currentColor">
       <path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function WandIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" strokeWidth="2" stroke="currentColor">
+      <path d="M5 19L16 8" strokeLinecap="round" />
+      <path d="M17 4l.7 1.8L19.5 6.5l-1.8.7L17 9l-.7-1.8L14.5 6.5l1.8-.7z" strokeLinejoin="round" />
+      <path d="M19.5 11.5l.4 1 1 .4-1 .4-.4 1-.4-1-1-.4 1-.4z" strokeLinejoin="round" />
     </svg>
   );
 }
