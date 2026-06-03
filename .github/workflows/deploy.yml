@@ -2,7 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [claude/decision-wheel-pro-OZlMw, main]
+    branches:
+      - claude/decision-wheel-pro-OZlMw
+      - claude/wizard-top-trumps-game-xrSt5
+      - main
   workflow_dispatch:
 
 permissions:
@@ -28,7 +31,12 @@ jobs:
           cache: npm
 
       - name: Setup Pages
+        # enablement: true lets this workflow turn on GitHub Pages (Actions
+        # source) automatically the first time, so no manual Settings toggle
+        # is required. Needs the `pages: write` permission set above.
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Install
         run: npm ci

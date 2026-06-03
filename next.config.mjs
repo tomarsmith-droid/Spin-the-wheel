@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const isPages = process.env.GITHUB_PAGES === "true";
-const repo = "spin-the-wheel";
+// Must match the repository name exactly — GitHub Pages serves project sites
+// at https://<owner>.github.io/<repo>/ and the request path is case-sensitive.
+const repo = "Spin-the-wheel";
 
 const nextConfig = {
   reactStrictMode: true,
